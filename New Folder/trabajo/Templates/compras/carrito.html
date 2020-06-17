@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+function incrementValue(val)
+{
+    var value = parseInt(document.getElementById('number'+val.toString()).value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('number').value = value;
+}
+function desValue()
+{
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value>0){
+    value--;}
+    document.getElementById('number').value = value;
+}
+
+var removeCartItem=document.getElementsByClassName('btn-quitar');
+for(car i=0;i<removeCartItem.length;i++){
+var button = removeCartItem[i];
+button.addEventListener('click',function(event){
+var buttonClicked=event.target;
+buttonClicked.parentElement.remove();
+
+
+
+});
+}
+
+
+
+
+
+
+
+    </script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>EnLinea</title>
+
+</head>
+<body>
+ <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" style="font-family: 'Lobster', cursive; font-size:xx-large" href="/">EnLinea</a>
+            <form class="form-inline" action="/busqueda" method="POST">
+                <div class="input-group ml-sm-3 mr-sm-3" role="group" aria-label="Basic example">
+                    <select style="border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-right: none; align-content: center;" class="selectpicker input-group ml-sm-3 " name="categorias" id="Categorias">
+                        <option value="todo">Todos</option>
+                        <option value="Computadoras">Computadoras</option>
+                        <option value="Arte y Artesanias">Arte y Artesanias</option>
+                        <option value="Moda">Moda</option>
+                        <option value="Belleza y Cuidado Personal">Belleza y Cuidado Personal</option>
+                        <option value="Salud y Bienestar">Salud y Bienestar</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Jueguetes">Jueguetes</option>
+                        <option value="Electrodomesticos">Electrodomésticos</option>
+                </select>
+                  <input class="form-control " type="search" name=busqueda placeholder="Buscar productos" aria-label="Search">
+                  <button class="input-group-button btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
+                </div>
+            </form>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse form-inline my-2 my-lg-0"  id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if session!="" %}
+                <a class="nav-item nav-link" href="/perfil/datos">Perfil</a>
+                <a class="nav-item nav-link" href="/cerrarcuenta">Cerrar Sesión</a>
+              {% else %}
+                <a class="nav-item nav-link" href="/iniciar">Inicia Sesión</a>
+                <a class="nav-item nav-link" href="/registrate">Registrate</a>
+              {% endif %}
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="/carrito">
+                      <i class="fa fa-shopping-basket mx-2"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+            <!-- --------------------------------------------------------------------- -->
+            <h1 class="mt-4">Carrito de compras</h1>
+
+            <script>var total=0;</script>
+            {% for array in lista%}
+            <script>val++;</script>
+            <div class="card mt-4">
+            <div class="row no-gutters">
+                <div class="col-auto">
+                    <img style="width:165px; height:150px; margin: auto" src="https://home.ripley.com.pe/Attachment/WOP_2/2031181092124/2031181092124-1.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col" style="border-left:solid rgba(0,0,0,.125) 1px">
+                    <div class="card-block px-2">
+                        <h4 class="card-title mt-2 float-left">{{array.1}}</h4>
+                        <p class="card-title mt-2 float-right text-secondary mr-3" id="precio" value={{array.8}}><em>Precio: S/.{{array.8}}</em></p><br style="clear:both">
+                        <p class="card-text clearfix pr-3">Presentamos la consola PlayStation 4. Ahora con un diseño más liviano y más delgado que nunca. Disco duro de 1 TB. Todos los mejores juegos.</p>
+                        <form class="float-left" method="POST" action="/{{array.9}}-">
+                            <button class="btn btn-light" type="submit">-</button>
+                        </form>
+                        <h5 class="float-left pt-2 mx-3">{{array.12}}</h5>
+                        <form class="float-left" method="POST" action="/{{array.9}}+">
+                            <button class="btn btn-light" type="submit">+</button>
+                            <script>var subtotal={{array.12*array.8}};
+                            total=total+subtotal
+                            </script>
+                        </form>
+                        <p class="text-info float-left pt-2 mx-3" >Subtotal: S/.<script>document.write(subtotal)</script></p>
+                        <form method="POST" action="/{{array.9}}e">
+                            <button class="btn btn-outline-warning float-right mr-3" type="submit" style="margin:auto">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+            {%endfor%}
+            <h3 class="mt-4 text-primary">Precio Total: S/.<script>document.write(total)</script></h3>
+            <form method="POST" action="/procesarCompra{{session}}">
+                <button class="btn btn-primary mt-2" type="submit"><i class="fa fa-shopping-basket"></i> Comprar Carrito</button>
+            </form>
+            <!-- ----------------------------------------------------------------------- -->
+        </div>
+      </div>
+    </main>
+    <br><br><br><br><br>
+    <!-- Footer -->
+
+
+    <footer style="background-color:#5f788a; border-top:solid grey" class="page-footer font-small stylish-color-dark pt-4">
+      <div class="container text-center text-md-left">
+        <div class="row">
+          <div class="col-md-4 mx-auto">
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Repositorio</h5>
+              <p class="text-light" >Accede directamente a paginas de interes.<br>
+                  "Dentro de <em>EnLinea</em> nos preocupamos por la satisfacción y eficiencia en tu busqueda"</p>
+          </div>
+          <hr class="clearfix w-100 d-md-none">
+          <div class="col-md-2 mx-auto">
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Usuarios</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-light" href="/registrate">Registrate</a>
+              </li>
+              <li>
+                <a class="text-light" href="/iniciar">Inicia Sesión</a>
+              </li>
+              <li>
+                <a class="text-light" href="/carrito">Carrito</a>
+              </li>
+              <li>
+                <a class="text-light" href="perfil/datos">Perfil</a>
+              </li>
+                <li>
+                <a class="text-light" href="/perfil/tarjeta">Tarjeta</a>
+              </li>
+            </ul>
+          </div>
+          <hr class="clearfix w-100 d-md-none">
+          <div class="col-md-2 mx-auto">
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Coloboradores</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-light" href="/registrarComercio">Registra un Comercio</a>
+              </li>
+              <li>
+                <a class="text-light" href="/iniciarc">Registra un Coloborador</a>
+              </li>
+              <li>
+                <a class="text-light" href="/registraColaborador">Inicia sesión Colaborador</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <ul class="list-unstyled list-inline text-center">
+        <li class="list-inline-item">
+          <a class="btn-floating btn-fb mx-1">
+            <i class="fa fa-facebook-f"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-tw mx-1">
+            <i class="fa fa-twitter"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-ig mx-1">
+            <i class="fa fa-instagram"> </i>
+          </a>
+        </li>
+      </ul>
+      <!-- Social buttons -->
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2020 Todos los derechos reservados: EnLinea
+      </div>
+      <!-- Copyright -->
+
+    </footer>
+<!-- Footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+    <form action="/busqueda" method="POST">
+<input type="text" name=busqueda placeholder="Buscar productos"/>
+<button type="submit"> Buscar </button>
+        <div>{{usuario}}</div>
+
+</form>
+<a href="/iniciarc" style="margin-top:-200px">Perteneces a un Comercio?</a> </div>
+{% endblock %}

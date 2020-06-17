@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+    {% if title %}
+        <title>EnLinea - }</title>
+    {% else %}
+        <title>EnLinea</title>
+    {% endif %}
+</head>
+<body>
+     <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" style="font-family: 'Lobster', cursive; font-size:xx-large" href="/">EnLinea</a>
+            <form class="form-inline" action="/busqueda" method="POST">
+                <div class="input-group ml-sm-3 mr-sm-3" role="group" aria-label="Basic example">
+                    <select style="border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-right: none; align-content: center;" class="selectpicker input-group ml-sm-3 " name="categorias" id="Categorias">
+                        <option value="todo">Todos</option>
+                        <option value="Computadoras">Computadoras</option>
+                        <option value="Arte y Artesanias">Arte y Artesanias</option>
+                        <option value="Moda">Moda</option>
+                        <option value="Belleza y Cuidado Personal">Belleza y Cuidado Personal</option>
+                        <option value="Salud y Bienestar">Salud y Bienestar</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Jueguetes">Jueguetes</option>
+                        <option value="Electrodomesticos">Electrodomésticos</option>
+                </select>
+                  <input class="form-control " type="search" name=busqueda placeholder="Buscar productos" aria-label="Search">
+                  <button class="input-group-button btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
+                </div>
+            </form>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse form-inline my-2 my-lg-0"  id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if session!="" %}
+                <a class="nav-item nav-link" href="/perfil/datos">Perfil</a>
+                <a class="nav-item nav-link" href="/cerrarcuenta">Cerrar Sesión</a>
+              {% else %}
+                <a class="nav-item nav-link" href="/iniciar">Inicia Sesión</a>
+                <a class="nav-item nav-link" href="/registrate">Registrate</a>
+              {% endif %}
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="/carrito">
+                      <i class="fa fa-shopping-basket mx-2"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+    <meta charset="UTF-8">
+    <script>function incrementValue()
+{
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('number').value = value;
+}
+function desValue()
+{
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value>1){
+    value--;}
+    document.getElementById('number').value = value;
+}
+
+</script>
+    <title>Title</title>
+</head>
+<body>
+<form action="/anadir" method="POST">
+    {{nombre}}
+    <input name="idproducto" style="opacity:0%" value="{{idproducto}}"/>
+    <div name="precio">{{precio}}</div>
+
+   <input type="button" onclick="desValue()" value="-" />
+    <input type="text" id="number" name="number" value="1"/>
+   <input type="button" onclick="incrementValue()" value="+" />
+
+    <button type="submit">Añadir carrito</button>
+</form>
+</body>
+</html>
+ </div>
+
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

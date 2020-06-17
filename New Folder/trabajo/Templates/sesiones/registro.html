@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>EnLinea</title>
+
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" style="font-family: 'Lobster', cursive; font-size:xx-large" href="#">EnLinea</a>
+            <form class="form-inline" action="/busqueda" method="POST">
+                <div class="input-group ml-sm-3 mr-sm-3" role="group" aria-label="Basic example">
+                    <select style="border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-right: none; align-content: center;" class="selectpicker input-group ml-sm-3 " name="categorias" id="Categorias">
+                        <option value="todo">Todos</option>
+                        <option value="Computadoras">Computadoras</option>
+                        <option value="Arte y Artesanias">Arte y Artesanias</option>
+                        <option value="Moda">Moda</option>
+                        <option value="Belleza y Cuidado Personal">Belleza y Cuidado Personal</option>
+                        <option value="Salud y Bienestar">Salud y Bienestar</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Jueguetes">Jueguetes</option>
+                        <option value="Electrodomesticos">Electrodomésticos</option>
+                </select>
+                  <input class="form-control " type="search" name=busqueda placeholder="Buscar productos" aria-label="Search">
+                  <button class="input-group-button btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
+                </div>
+            </form>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse form-inline my-2 my-lg-0"  id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if sesiones %}
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="#">Perfil</a>
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="#">Cerrar Sesión</a>
+              {% else %}
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="/iniciar">Inicia Sesión</a>
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="/registrate">Registrate</a>
+              {% endif %}
+                <a class="nav-item nav-link btn btn-outline-info mx-2" href="/carrito">
+                      <i class="fa fa-shopping-basket mx-2"></i>
+                </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+            <!-- --------------------------------------------------------------------- -->
+
+<form action="/registrando" method="POST">
+    <div class="form-group mt-4">
+        <label >Nombre</label>
+        <input class="form-control" type=text name="nombre"/>
+    </div>
+
+      <div class="form-group mt-4">
+          <label >Apellido Paterno</label>
+    <input class="form-control" type=text name="apellidoPaterno"/>
+      </div>
+
+          <div class="form-group mt-4">
+              <label >Apellido Materno</label>
+<input class="form-control" type=text name="apellidoMaterno" requiered/>
+              </div>
+
+          <div class="form-group mt-4">
+              <label >Fecha de Nacimiento</label>
+    <input class="form-control" type=date name="fechaN" required/>
+              </div>
+
+              <div class="form-group mt-4">
+                  <label >Usuario</label>
+    <input class="form-control" type=text name="usuario" required/>
+                  </div>
+
+                  <div class="form-group mt-4">
+                      <label >Correo</label>
+    <input class="form-control" type=email name="correo" required/>
+                      </div>
+
+                      <div class="form-group mt-4">
+                          <label >Contraseña</label>
+        <input class="form-control" type=password name="password1" required/>
+                          </div>
+
+                          <div class="form-group mt-4">
+                              <label >Repetir Contraseña</label>
+    <input class="form-control" type=password name="password2" required/>
+                              </div>
+
+                              <div class="form-group mt-4">
+                                  <label >Telefono</label>
+    <input class="form-control" type=text name="telefono" required/>
+                                  </div>
+
+    <div class="form-group mt-4">
+        <label >Genero</label>
+    <select class="form-control" id="genero" name="genero" >
+  <option value=1>Masculino</option>
+  <option value=0>Femenino</option>
+</select>
+    </div>
+
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+<br>
+    <br>
+</form>
+
+
+<!-- ----------------------------------------------------------------------- -->
+        </div>
+      </div>
+    </main>
+    <br><br><br><br><br>
+    <!-- Footer -->
+
+
+    <footer style="background-color:#5f788a; border-top:solid grey" class="page-footer font-small stylish-color-dark pt-4">
+      <div class="container text-center text-md-left">
+        <div class="row">
+          <div class="col-md-4 mx-auto">
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Repositorio</h5>
+              <p class="text-light" >Accede directamente a paginas de interes.<br>
+                  "Dentro de <em>EnLinea</em> nos preocupamos por la satisfacción y eficiencia en tu busqueda"</p>
+          </div>
+          <hr class="clearfix w-100 d-md-none">
+          <div class="col-md-2 mx-auto">
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Usuarios</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-light" href="/registrate">Registrate</a>
+              </li>
+              <li>
+                <a class="text-light" href="/iniciar">Inicia Sesión</a>
+              </li>
+              <li>
+                <a class="text-light" href="/carrito">Carrito</a>
+              </li>
+              <li>
+                <a class="text-light" href="perfil/datos">Perfil</a>
+              </li>
+                <li>
+                <a class="text-light" href="/perfil/tarjeta">Tarjeta</a>
+              </li>
+            </ul>
+          </div>
+          <hr class="clearfix w-100 d-md-none">
+          <div class="col-md-2 mx-auto">
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Coloboradores</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a class="text-light" href="/registrarComercio">Registra un Comercio</a>
+              </li>
+              <li>
+                <a class="text-light" href="/iniciarc">Registra un Coloborador</a>
+              </li>
+              <li>
+                <a class="text-light" href="/registraColaborador">Inicia sesión Colaborador</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <ul class="list-unstyled list-inline text-center">
+        <li class="list-inline-item">
+          <a class="btn-floating btn-fb mx-1">
+            <i class="fa fa-facebook-f"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-tw mx-1">
+            <i class="fa fa-twitter"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-ig mx-1">
+            <i class="fa fa-instagram"> </i>
+          </a>
+        </li>
+      </ul>
+      <!-- Social buttons -->
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2020 Todos los derechos reservados: EnLinea
+      </div>
+      <!-- Copyright -->
+
+    </footer>
+<!-- Footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
